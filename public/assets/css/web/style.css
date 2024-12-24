@@ -1,0 +1,424 @@
+@import url("https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap");
+
+* {
+  font-family: "Rethink Sans", sans-serif;
+  font-optical-sizing: auto;
+}
+/* تصميم شعار التحميل */
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0E086D; /* اللون الأساسي للموقع */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 24px;
+  z-index: 9999;
+}
+
+
+
+#loader img {
+  width: 100px;
+  height: auto;
+  animation: spin 2s linear infinite;
+  border: 5px solid #ffffff;
+  border-radius: 50%;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* rgb(35,119,196) */
+.navbar {
+  background-color: rgb(14, 8, 109);
+}
+/* لون خلفية القائمة إلى أسود والنص إلى أبيض */
+.dropdown-menu {
+  background-color: #696bb9 !important; /* خلفية سوداء */
+}
+.dropdown-menu .dropdown-item {
+  color: #fff; /* نص أبيض */
+}
+.dropdown-divider {
+  border-color: #ffffff4b; /* لون أبيض */
+}
+/* تغيير لون النص عند التمرير */
+.dropdown-menu .dropdown-item:hover {
+  background-color: #444; /* خلفية داكنة عند التمرير */
+  color: #fff; /* نص أبيض عند التمرير */
+}
+.carousel-item img {
+  height: 100vh;
+}
+
+/* =======icon color===== */
+.co {
+  color: rgb(173, 216, 230);
+}
+/* =========== */
+.carousel-caption {
+  background-color: rgb(173, 216, 230, 0.7);
+  border-radius: 20px;
+  bottom: 10rem;
+}
+.carousel-caption:hover {
+  background-color: rgb(173, 216, 230, 0.9);
+  transition: all ease 0.7s;
+}
+
+.bt {
+  background-color: rgb(255, 99, 71);
+}
+.bt:hover {
+    border-top-left-radius: unset !important;
+    border-bottom-left-radius: unset !important;
+  border-radius: 10px !important;
+
+  transition: all ease 0.7s !important;
+}
+
+/* ==========make it as point like circle============ */
+.carousel-indicators button {
+  height: 20px !important;
+  width: 20px !important;
+  border-radius: 50%;
+}
+.carousel-indicators button:hover {
+  background-color: rgb(255, 99, 71);
+}
+/*
+=========product======= */
+.text-header {
+  border-bottom: #198754 solid 3px;
+}
+.btn-primary{
+
+  width:90px ;
+}
+.btn-primary:hover{
+  border-radius: 20px;
+  transition: all ease 0.7s;
+}
+.blue{
+color: blue !important;
+
+}
+.bluecimon{
+  color: blue;
+
+}
+.bluecimon:hover{
+  transition: all ease 0.7s;
+color: #198754 ;
+cursor: pointer;
+}
+.card{
+  margin-top: 5px;
+  text-align: center;
+/* justify-content: center;
+justify-items: center; */
+}
+/*
+=========contact======= */
+.contact{
+height:60vh ;
+margin-top: 5%;
+margin-bottom: 5%;
+
+}
+.bucontact{
+  border-radius: 20px 0px 0px 20px !important;
+}
+
+
+.contacttext:hover {
+  transform: rotate(2deg); /* زاوية التدوير */
+  transform: scale(1.05); /* توسيع الصورة بنسبة 5% عند التمرير */
+  transition: all ease 0.7s;
+
+}
+/* =========== endcontact============= */
+.align-self{
+  align-self: center;
+}
+
+.max_heigh_300{
+  max-height: 400px;
+}
+.carousel-inner img{
+/* height: 100%; */
+align-self: center;
+}
+.width{
+  max-height: 500px;
+}
+img:hover{
+  transform: scale(1.05); /* توسيع الصورة بنسبة 5% عند التمرير */
+  transition: all ease 0.7s;
+
+}
+.imgtrans{
+opacity: 100;
+}
+.imgtrans img:hover{
+ transform: rotate(5deg) scale(1.1);
+
+  transition: all ease 1s;
+
+}
+
+.auto_size{
+  width: auto;
+}
+
+
+/* ===========best=product============ */
+/* .card-body2 {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+} */
+.card-body2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start; /* محاذاة العناصر إلى اليمين */
+  padding: 3px;
+}
+/* ============contract============ */
+.divcontractstyle{
+  background-color: rgba(0, 0, 255, 0.733);
+  text-align: center;
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
+  height: 30px;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  display: flex;
+}
+
+/* ============services======== */
+.bg-none{
+  background-color:white;
+  color: #0E086D;
+
+}
+/* +++++++++++footer++++++++++ */
+
+
+.footer{
+	background: #06022b;;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+	box-sizing: border-box;
+	width: 100%;
+	text-align: left;
+	font: bold 16px sans-serif;
+	padding: 55px 50px;
+  color:#fff!important;
+}
+
+.footer .footer-left,
+.footer .footer-center,
+.footer .footer-right{
+	display: inline-block;
+	vertical-align: top;
+}
+
+/* Footer left */
+
+.footer .footer-left{
+	width: 40%;
+}
+
+
+.footer h3{
+	color:  #ffffff;
+	font: normal 36px 'Open Sans', cursive;
+	margin: 0;
+}
+
+.footer h3 span{
+	color:  rgb(25,135,84);
+}
+
+/* Footer links */
+
+.footer .footer-links{
+	color:  #ffffff;
+	margin: 20px 0 12px;
+	padding: 0;
+}
+
+.footer .footer-links a{
+	display:inline-block;
+	line-height: 1.8;
+  font-weight:400;
+	text-decoration: none;
+	color:  inherit;
+}
+
+.footer .footer-name{
+  color: rgb(25,135,84);
+	font-size: 14px;
+	font-weight: normal;
+	margin: 0;
+}
+
+/* Footer Center */
+
+.footer .footer-center{
+	width: 35%;
+}
+
+.footer .footer-center i{
+	background-color:  #06022b;
+	color: #ffffff;
+	font-size: 25px;
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 42px;
+	margin: 10px 15px;
+	vertical-align: middle;
+}
+
+.footer .footer-center i.fa-envelope{
+	font-size: 17px;
+	line-height: 38px;
+}
+
+.footer .footer-center p{
+	display: inline-block;
+	color: #ffffff;
+  font-weight:400;
+	vertical-align: middle;
+	margin:0;
+}
+
+.footer .footer-center p span{
+	display:block;
+	font-weight: normal;
+	font-size:14px;
+	line-height:2;
+}
+
+.footer .footer-center p a{
+	color:  rgb(25,135,84);
+	text-decoration: none;;
+}
+
+.footer .footer-links a:before {
+  content: "|";
+  font-weight:300;
+  font-size: 20px;
+  left: 0;
+  color: #fff;
+  display: inline-block;
+  padding-right: 5px;
+}
+
+.footer .footer-links .link-1:before {
+  content: none;
+}
+
+/* Footer Right */
+
+.footer .footer-right{
+	width: 20%;
+}
+
+.footer .footer-about{
+	line-height: 20px;
+	color:  #92999f;
+	font-size: 13px;
+	font-weight: normal;
+	margin: 0;
+}
+
+.footer .footer-about span{
+	display: block;
+	color:  #ffffff;
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.footer .footer-socials{
+	margin-top: 25px;
+}
+
+.footer .footer-socials a{
+	display: inline-block;
+	font-size: 35px;
+	cursor: pointer;
+	color: #ffffff;
+	text-align: center;
+	line-height: 35px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+
+.footer .logo {
+    max-width: 100px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+
+@media (max-width: 800px) {
+
+	.footer{
+		font: bold 14px sans-serif;
+	}
+
+	.footer .footer-left,
+	.footer .footer-center,
+	.footer .footer-right{
+		display: block;
+		width: 100%;
+		margin-bottom: 40px;
+		text-align: center;
+	}
+
+	.footer .footer-center i{
+		margin-left: 0;
+	}
+
+}
+
+/* ==========Custom Scrollbar============ */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(14,8,109);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(25,135,84);
+}
