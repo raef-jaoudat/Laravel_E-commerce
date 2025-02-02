@@ -32,4 +32,5 @@ return [
 
     'place_order'=>'إضافة طلب',
     'out_of_stock'=>'إنتهى من المخزن',
+   'no_products_found'=>'لا يوجد منتجات',
 ];

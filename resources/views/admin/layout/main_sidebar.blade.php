@@ -46,6 +46,13 @@
                                 <p>{{ trans('admin_sidebar_trans.Product') }}</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('sales') }}" class="nav-link {{$route == 'sales' ? 'active' : '' }}">
+                                <i class="fas fa-store nav-icon"></i>
+
+                                <p>{{ trans('sales') }}</p>
+                            </a>
+                        </li>
 
                 </li>
                 {{-- <li class="nav-item">

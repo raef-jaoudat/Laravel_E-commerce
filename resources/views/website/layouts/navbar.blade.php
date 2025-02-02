@@ -56,9 +56,11 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto
+            {{-- {{ app()->getLocale() == 'ar' ? 'ms-auto' : 'me-auto' }} --}}
+              mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link {{$route == 'index_page' ? 'active' : ''}}" aria-current="page" href="{{url('/')}}">{{trans('website_navbar.Home')}}</a>
+                    <a class="nav-link {{$route == 'index_page' ? 'active' : ''}}" aria-current="page" href="{{url('/home')}}">{{trans('website_navbar.Home')}}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{$route == 'categories_page' ? 'active' : ''}}"  href="{{route('get_categories')}}">{{trans('website_navbar.category')}}</a>
@@ -72,7 +74,7 @@
                 @guest
                     @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{trans('website_navbar.login') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{ trans('website_navbar.login') }}</a>
                         </li>
                     @endif
 
@@ -82,15 +84,16 @@
                         </li>
                     @endif
                 @else
+                    <!-- عند تسجيل الدخول، يظهر اسم المستخدم -->
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
+                            {{ Auth::user()->fname }} <!-- عرض اسم المستخدم -->
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
 
@@ -101,14 +104,15 @@
                     </li>
                 @endguest
 
+                <!-- Dropdown for language selection -->
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        @if ( Config::get('app.locale')  == 'ar')
+                        @if (Config::get('app.locale') == 'ar')
                             {{ LaravelLocalization::getCurrentLocaleName() }}
-                            <img src="{{asset('assets/img/flags/ar.png') }}" alt="ar" style="max-width: 20px">
+                            <img src="{{ asset('assets/img/flags/ar.png') }}" alt="ar" style="max-width: 20px">
                         @else
                             {{ LaravelLocalization::getCurrentLocaleName() }}
-                            <img src="{{asset('assets/img/flags/en.png') }}" alt="en" style="max-width: 20px">
+                            <img src="{{ asset('assets/img/flags/en.png') }}" alt="en" style="max-width: 20px">
                         @endif
                     </button>
                     <ul class="dropdown-menu">
@@ -120,6 +124,7 @@
                     </ul>
                 </div>
             </ul>
+
         </div>
     </div>
   </nav>

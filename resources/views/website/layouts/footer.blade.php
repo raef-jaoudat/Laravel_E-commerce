@@ -1,4 +1,4 @@
-<div style="min-height: 100px;"></div>
+
 <footer class="footer" >
     <div class="container">
     <div class="footer-left"  class="h-card">
@@ -23,10 +23,10 @@
         <div class="p-address">
             <i class="fa fa-map-marker" aria-hidden="true"></i>
             <p>
-                <span itemprop="streetAddress" class="p-street-address">الشارع</span>,
-                <span itemprop="addressLocality" class="p-locality"> الموقع</span>,
-                <span itemprop="addressRegion" class="p-region">المدينة</span>,
-                <span itemprop="postalCode" class="p-postal-code">الرمز البريدي</span>
+                <span itemprop="streetAddress" class="p-street-address">{{trans('website_footer.Street')}}</span>,
+                <span itemprop="addressLocality" class="p-locality">{{trans('website_footer.the_site')}} </span>,
+                <span itemprop="addressRegion" class="p-region">{{trans('website_footer.City')}}</span>,
+                <span itemprop="postalCode" class="p-postal-code">{{trans('website_footer.zip_code')}}</span>
             </p>
         </div>
         <div>
@@ -41,7 +41,7 @@
 
     <div class="footer-right">
         <p class="footer-about">
-            <span>عن الموقع</span>
+            <span>{{trans('website_footer.About_the_site')}} </span>
             Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
         </p>
         <div class="footer-socials">

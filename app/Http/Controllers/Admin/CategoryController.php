@@ -6,7 +6,7 @@ use Laracasts\Flash\Flash;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\storeCategoryRequest;
 use Illuminate\Http\Request;
-use App\Models\category;
+use App\Models\Category;
 use App\Http\Requests\updateCategoryRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
@@ -48,7 +48,10 @@ class CategoryController extends Controller
             $validate = $request->validated();
 
             // تخزين الصورة
-            $image = $request->file('image')->store('assets/uploads/Category', 'public');
+            // $image = $request->file('image')->store('assets/uploads/Category', 'public');
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension(); // توليد اسم فريد للصورة
+            $image->move(public_path('assets/uploads/Category'), $imageName);
 
 
             // إنشاء فئة جديدة
@@ -73,7 +76,8 @@ class CategoryController extends Controller
                 'en' => $request->meta_description_en
             ];
             $category->meta_keywords = $request->meta_keywords;
-            $category->image = $image;
+            // $category->image = $image;
+            $category->image = 'assets/uploads/Category/' . $imageName;
             $category->save();
 
             session()->flash('success', 'تم إنشاء العنصر بنجاح!');
@@ -109,40 +113,48 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(updateCategoryRequest $request, Category $category)
-    {
+    public function update(UpdateCategoryRequest $request, Category $category)
+{
+    try {
+        $validated = $request->validated();
 
-        try {
+        $image = $category->image; // الاحتفاظ بالصورة القديمة إذا لم يتم تحديثها
 
-            $validated = $request->validated();
-
-            $image = $category->image;
-
-            if ($request->hasFile('image')) {
-                Storage::delete($image);
-                $image = $request->file('image')->store('assets/uploads/Category', 'public');
+        if ($request->hasFile('image')) {
+            // حذف الصورة القديمة إذا كانت موجودة
+            if ($category->image && file_exists(public_path($category->image))) {
+                unlink(public_path($category->image));
             }
 
-            $category->update([
-                'name' => ['ar' => $request->name_ar, 'en' => $request->name_en],
-                'slug' => $request->slug,
-                'description' => ['ar' => $request->description_ar, 'en' => $request->description_en],
-                'is_showing' => $request->is_showing ? '1' : '0',
-                'is_popular' => $request->is_popular ? '1' : '0',
-                'meta_title' => ['ar' => $request->meta_title_ar, 'en' =>$request->meta_title_en],
-                'meta_description' => ['ar' => $request->meta_description_ar, 'en' => $request->meta_description_en],
-                'meta_keywords' => $request->meta_keywords,
-                'image' => $image,
+            // حفظ الصورة الجديدة في مجلد public مباشرة
+            $imageFile = $request->file('image');
+            $imageName = time() . '_' . $imageFile->getClientOriginalName();
+            $imageFile->move(public_path('assets/uploads/Category'), $imageName);
 
-            ]);
-            return redirect()->route('categories.index')->with('success',trans("messages_trans.success_update"));
-
-        } catch (\Exception $e) {
-            return redirect()->withErrors('error', $e->getMessage());
-
+            // حفظ المسار الجديد في قاعدة البيانات
+            $image = 'assets/uploads/Category/' . $imageName;
         }
 
+        // تحديث بيانات الفئة في قاعدة البيانات
+        $category->update([
+            'name' => ['ar' => $request->name_ar, 'en' => $request->name_en],
+            'slug' => $request->slug,
+            'description' => ['ar' => $request->description_ar, 'en' => $request->description_en],
+            'is_showing' => $request->is_showing ? '1' : '0',
+            'is_popular' => $request->is_popular ? '1' : '0',
+            'meta_title' => ['ar' => $request->meta_title_ar, 'en' => $request->meta_title_en],
+            'meta_description' => ['ar' => $request->meta_description_ar, 'en' => $request->meta_description_en],
+            'meta_keywords' => $request->meta_keywords,
+            'image' => $image, // إضافة الصورة هنا
+        ]);
+
+        return redirect()->route('categories.index')->with('success', trans("messages_trans.success_update"));
+
+    } catch (\Exception $e) {
+        return redirect()->back()->withErrors(['error' => $e->getMessage()]);
     }
+}
+
 
 
     /**
@@ -150,10 +162,15 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        if (Storage::disk('public')->exists($category->image)) {
-            Storage::disk('public')->delete($category->image);
+        // حذف الصورة فقط إذا كانت موجودة
+        if ($category->image && file_exists(public_path($category->image))) {
+            unlink(public_path($category->image));
         }
+
+        // حذف الفئة من قاعدة البيانات
         $category->delete();
-        return redirect()->route('categories.index')->with('success',trans('messages_trans.success_delete'));
+
+        return redirect()->route('categories.index')->with('success', trans('messages_trans.success_delete'));
     }
+
 }

@@ -77,7 +77,7 @@
                     <div class="row">
                         <label for="image">{{trans('product_trans.image')}}</label>
                         <div class="col">
-                            <img src="{{Storage::url($product->image)}}" alt="" class="img-thumbnail" style="max-width:100px;">
+                            <img src="{{ asset($product->image) }}" alt="" class="img-thumbnail" style="max-width:100px;">
                         </div>
                         <div class="col">
                             <input type="file" class="form-control  @error('image') is-invalid @enderror" name="image">

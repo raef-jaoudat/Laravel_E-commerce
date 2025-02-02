@@ -35,7 +35,7 @@ class LoginController extends Controller
             return  redirect()->route('dash')->with('success','login Successfully');
 
         } else {
-            return  redirect()->route('/')->with('success','login Successfully');
+            return  redirect()->route('index_page')->with('success','login Successfully');
 
             // return redirect('/');
         }

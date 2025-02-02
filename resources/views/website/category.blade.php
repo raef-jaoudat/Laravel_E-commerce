@@ -24,7 +24,7 @@
             <div class="card mb-3">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="{{Storage::url($category->image)}}" class="card-img-top img-responsive" style= "height: 250px; width: 100%;" alt="...">
+                        <img src="{{ asset('/' . $category->image) }}" class="card-img-top img-responsive" style= "height: 250px; width: 100%;" alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -49,7 +49,7 @@
                 @foreach($category->products as $product)
                     <div class="col-4">
                         <div class="card my-5" style="width: 18rem;">
-                            <img src="{{Storage::url($product->image)}}" class=" card-img-top img-responsive"
+                            <img src="{{ asset('/' . $product->image) }}" class=" card-img-top img-responsive"
                                  style="height: 250px; width: 100%;" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{$product->meta_title}}</h5>

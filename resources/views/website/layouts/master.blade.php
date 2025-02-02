@@ -15,7 +15,9 @@
   </style>
 
 </head>
-<body dir="{{(Config::get('app.locale') == 'ar' ? 'rtl' : 'ltr')}}">
+<body
+{{-- dir="{{(Config::get('app.locale') == 'ar' ? 'rtl' : 'ltr')}}" --}}
+>
 <div class="wrapper">
     <div id="loader">
         <img src="{{ asset('images/logo.png') }}" alt="جاري التحميل">
@@ -23,14 +25,67 @@
       </div>
   <!-- Navbar -->
   @include('website.layouts.navbar')
+  @if (session('success'))
+  <div class="alert alert-success" id="success-alert" style="margin-top: 70px;">
+      {{ session('success') }}
+  </div>
+@endif
+
+@if (session('error'))
+  <div class="alert alert-danger" id="error-alert" style="margin-top: 70px;">
+      {{ session('error') }}
+  </div>
+@endif
   <!-- /.navbar -->
   @yield('content')
+
 
  @include('website.layouts.footer')
 
 </div>
 <!-- ./wrapper -->
 @include('website.layouts.main-js')
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // تحديد مدة الظهور بالمللي ثانية (5000 = 5 ثوانٍ)
+    const alertDuration = 5000;
+
+    // أخفاء تنبيه النجاح
+    const successAlert = document.getElementById('success-alert');
+    if (successAlert) {
+        setTimeout(() => {
+            successAlert.style.transition = "opacity 4s ease";
+            successAlert.style.opacity = 0;
+            setTimeout(() => successAlert.remove(), 500); // إزالة العنصر بعد انتهاء التأثير
+        }, alertDuration);
+    }
+
+    // أخفاء تنبيه الخطأ
+    const errorAlert = document.getElementById('error-alert');
+    if (errorAlert) {
+        setTimeout(() => {
+            errorAlert.style.transition = "opacity 0.5s ease";
+            errorAlert.style.opacity = 0;
+            setTimeout(() => errorAlert.remove(), 500); // إزالة العنصر بعد انتهاء التأثير
+        }, alertDuration);
+    }
+});
+
+</script>
+<script>
+    document.getElementById("subscribeBtn").addEventListener("click", function(event) {
+        event.preventDefault();
+        let email = document.getElementById("emailInput").value;
+
+        if(email) {
+            let url = "{{ url('/contact') }}?email=" + encodeURIComponent(email);
+            window.location.href = url;
+        } else {
+            alert("Please insert yor email");
+        }
+    });
+    </script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" integrity="sha512-uKQ39gEGiyUJl4AI6L+ekBdGKpGw4xJ55+xyJG7YFlJokPNYegn9KwQ3P8A7aFQAUtUsAQHep+d/lrGqrbPIDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 </html>

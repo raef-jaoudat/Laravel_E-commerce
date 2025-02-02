@@ -65,33 +65,40 @@
             </div>
             <div class="col-5">
                 <div class="card">
-                    <div class="card-title text-center"><h3>{{trans('website_trans.order_details')}}</h3></div>
-                    <div class="card-body">
-                        <table class="table table-hover">
-                            <thead>
 
-                            <tr>
-                                <th>#</th>
-                                <th>{{trans('website_trans.product')}}</th>
-                                <th>{{trans('website_trans.quantity')}}</th>
-                                <th>{{trans('website_trans.selling_price')}}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @php $i = 1; @endphp
-                            @foreach($carts as $cart)
-                                <tr>
-                                    <td>{{$i++}}</td>
-                                    <td>{{$cart->product->name}}</td>
-                                    <td>{{$cart->qty}}</td>
-                                    <td>{{$cart->product->selling_price}}</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <button class="btn btn-outline-primary">{{trans('website_trans.place_order')}}</button>
+
+                    <form action="{{ route('checkout.checkout') }}" method="POST">
+                        @csrf
+                        <div class="card-title text-center">
+                            <h3>{{ trans('website_trans.order_details') }}</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>{{ trans('website_trans.product') }}</th>
+                                        <th>{{ trans('website_trans.quantity') }}</th>
+                                        <th>{{ trans('website_trans.selling_price') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php $i = 1; @endphp
+                                    @foreach($carts as $cart)
+                                        <tr>
+                                            <td>{{ $i++ }}</td>
+                                            <td>{{ $cart->product->name }}</td>
+                                            <td>{{ $cart->qty }}</td>
+                                            <td>{{ $cart->product->selling_price }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="submit" class="btn btn-outline-primary">{{ trans('website_trans.place_order') }}</button>
+                    </form>
                 </div>
+                {{-- </div>؟؟؟؟؟؟؟؟؟؟؟؟؟ --}}
             </div>
 
         </div>

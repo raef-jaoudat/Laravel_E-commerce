@@ -39,8 +39,9 @@ input[type="number"] {
                     </div>
 
                     @php $total_price = 0; @endphp
-                    @forelse($cart_products as $product_cart)
+
                         <div class="card rounded-3 mb-4">
+                            @forelse($cart_products as $product_cart)
                             <div class="card-body p-4">
                                 <div class="row d-flex justify-content-between align-items-center">
                                     <div class="col-md-2 col-lg-2 col-xl-2">
@@ -74,7 +75,7 @@ input[type="number"] {
                                         <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                                             <h5 class="mb-0" id="">
                                                 @php $product_total = $product_cart->Product->selling_price *  $product_cart->qty; @endphp
-                                                {{ $product_total }}
+                                                {{ $product_total }}$
                                             </h5>
                                         </div>
                                         @else
@@ -102,7 +103,7 @@ input[type="number"] {
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-4">
-                        <h3 id="total">{{ $total_price }}</h3>
+                        <h3 id="total">{{ $total_price }}$</h3>
                     </div>
                     <div class="col-4">
                         <a href="{{ route('checkout.index') }}"

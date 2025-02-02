@@ -13,7 +13,7 @@
 @endsection
 
 @section('content')
-<div class="content-header" style="{{ app()->getLocale() == 'en' ? 'margin-left: 20%;' : 'margin-right: 20%;' }}>
+<div class="content-header" style="{{ app()->getLocale() == 'en' ? 'margin-left: 20%;' : 'margin-right: 20%;' }}">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
@@ -58,7 +58,8 @@
                 <div class="col">
                     <label for="image">{{trans('category_trans.image')}}</label>
                     <div class="input-group mb-3 col">
-                        <img src="{{Storage::url($category->image)}}" alt="" class="img-thumbnail" style="max-width:200px;">
+                        {{-- <img src="{{Storage::url($category->image)}}" alt="" class="img-thumbnail" style="max-width:200px;"> --}}
+                        <img src="{{ asset($category->image) }}" alt="" class="img-thumbnail" style="max-width:200px;">
                     </div>
                 </div>
 

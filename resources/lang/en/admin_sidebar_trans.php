@@ -6,3 +6,4 @@ return [
     'Category'=> 'category',
     'Product'=> 'Product',
 ];
+

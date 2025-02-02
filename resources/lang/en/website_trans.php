@@ -31,5 +31,6 @@ return [
     'order_details'=>'Order Details',
 
     'place_order'=>'Add Order',
-    'out_of_stock'=>'OutOfStock'
+    'out_of_stock'=>'OutOfStock',
+    'no_products_found'=>'no products found',
 ];

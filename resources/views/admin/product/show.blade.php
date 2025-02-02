@@ -67,7 +67,7 @@
                     <div class="row my-2">
                         <label for="image">{{trans('product_trans.image')}}</label>
                         <div class="col">
-                            <img src="{{Storage::url($product->image)}}" alt="" class="img-thumbnail" style="max-width:100px;">
+                            <img src="{{ asset($product->image) }}" alt="" class="img-thumbnail" style="max-width:100px;">
                         </div>
 
                     </div>

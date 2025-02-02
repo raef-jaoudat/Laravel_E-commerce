@@ -8,7 +8,7 @@
 <script src="{{ asset('assets/js/owl/owl.carousel.js') }}"></script>
 <script src="{{ asset('assets/js/owl/owl.carousel.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>$('.owl-carousel').owlCarousel({
     loop:true,
@@ -21,10 +21,10 @@
             items:1
         },
         600:{
-            items:3
+            items:2
         },
         1000:{
-            items:5
+            items:4
         }
     }
 })</script>
@@ -40,12 +40,15 @@
             items:1
         },
         600:{
-            items:3
+            items:2
         },
         1000:{
-            items:5
+            items:4
         }
     }
-})</script>
+})
+</script>
+{{-- /////////////////////// --}}
+
 
 @yield('js')

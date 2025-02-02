@@ -34,58 +34,73 @@
 
         <div class="card-header">
             <a href="
-            {{route('categories.create')}}
-            " class="btn btn-outline-primary">{{trans('buttons_trans.create')}}</a>
+            {{ route('categories.create') }}
+            "
+                class="btn btn-outline-primary">{{ trans('buttons_trans.create') }}</a>
         </div>
         <div class="card-body">
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
-                <tr>
-                    <th>#</th>
-                    <th>{{trans('category_trans.name')}}</th>
-                    <th>{{trans('category_trans.image')}}</th>
-                    <th>{{trans('category_trans.is_showing')}}</th>
-                    <th>{{trans('category_trans.is_popular')}}</th>
-                    <th>{{trans('buttons_trans.Actions')}}</th>
-                </tr>
+                    <tr>
+                        <th>#</th>
+                        <th>{{ trans('category_trans.name') }}</th>
+                        <th>{{ trans('category_trans.image') }}</th>
+                        <th>{{ trans('category_trans.is_showing') }}</th>
+                        <th>{{ trans('category_trans.is_popular') }}</th>
+                        <th>{{ trans('buttons_trans.Actions') }}</th>
+                    </tr>
                 </thead>
                 <tbody>
-                @php $i = 1; @endphp
-                @foreach($categories as $category)
-                <tr>
-                    <td>{{$i++}}</td>
-                    <td>
-                        {{$category->name}}
-                    </td>
-                    <td>
-                        @if(Storage::disk('public')->exists($category->image))
+                    @php $i = 1; @endphp
+                    @foreach ($categories as $category)
+                        <tr>
+                            <td>{{ $i++ }}</td>
+                            <td>
+                                {{ $category->name }}
+                            </td>
+                      <td>
+                       {{--  @if (Storage::disk('public')->exists($category->image))
                             <img src="{{ Storage::url($category->image) }}" alt="Category Image" class="img-thumbnail" style="max-width: 100px;">
                         @else
                             <span></span>
-                        @endif
-                    </td>
+                        @endif --}}
+                            @if (file_exists(public_path($category->image)))
+                                <img src="{{ asset($category->image) }}" alt="Category Image" class="img-thumbnail"
+                                    style="max-width: 100px;">
+                            @else
+                                <img src="{{ asset('assets/uploads/default.jpg') }}" alt="Default Image"
+                                    class="img-thumbnail" style="max-width: 100px;">
+                            @endif
 
-                    <td>
-                        @if($category->is_showing == 1)
-                            <span class="badge badge-success">{{trans('category_trans.showing')}}</span>
-                        @else
-                            <span class="badge badge-danger">{{trans('category_trans.hidden')}}</span>
-                        @endif
-                    </td>
-                    <td>
-                        @if($category->is_popular == 1)
-                            <span class="badge badge-success">{{trans('category_trans.popular')}}</span>
-                        @else
-                            <span class="badge badge-danger">{{trans('category_trans.no_popular')}}</span>
-                        @endif
-                    </td>
-                    <td>
-                        <a href="{{route('categories.show',$category->id)}}" class="btn btn-sm btn-outline-success">{{trans('buttons_trans.show')}}</a>
-                        <a href="{{route('categories.edit',$category->id)}}" class="btn btn-sm btn-outline-warning">{{trans('buttons_trans.edit')}}</a>
-                       @include('admin.includes.delete_modal',['type'=>'category','data'=>$category,'routes'=>'categories.destroy'])
-                    </td>
-                </tr>
-                @endforeach
+                            </td>
+
+                            <td>
+                                @if ($category->is_showing == 1)
+                                    <span class="badge badge-success">{{ trans('category_trans.showing') }}</span>
+                                @else
+                                    <span class="badge badge-danger">{{ trans('category_trans.hidden') }}</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if ($category->is_popular == 1)
+                                    <span class="badge badge-success">{{ trans('category_trans.popular') }}</span>
+                                @else
+                                    <span class="badge badge-danger">{{ trans('category_trans.no_popular') }}</span>
+                                @endif
+                            </td>
+                            <td>
+                                <a href="{{ route('categories.show', $category->id) }}"
+                                    class="btn btn-sm btn-outline-success">{{ trans('buttons_trans.show') }}</a>
+                                <a href="{{ route('categories.edit', $category->id) }}"
+                                    class="btn btn-sm btn-outline-warning">{{ trans('buttons_trans.edit') }}</a>
+                                @include('admin.includes.delete_modal', [
+                                    'type' => 'category',
+                                    'data' => $category,
+                                    'routes' => 'categories.destroy',
+                                ])
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
 
             </table>
@@ -99,43 +114,42 @@
 
 @section('js')
 
-<script>
-    $(document).ready(function() {
+    <script>
+        $(document).ready(function() {
 
-        @if(session('success'))
-            toastr.success("{{ session('success') }}");
-        @endif
-        @if(session('error'))
-            toastr.error("{{ session('error') }}");
-        @endif
-        @if(session('info'))
-            toastr.info("{{ session('info') }}");
-        @endif
-        @if(session('warning'))
-            toastr.warning("{{ session('warning') }}");
-        @endif
+            @if (session('success'))
+                toastr.success("{{ session('success') }}");
+            @endif
+            @if (session('error'))
+                toastr.error("{{ session('error') }}");
+            @endif
+            @if (session('info'))
+                toastr.info("{{ session('info') }}");
+            @endif
+            @if (session('warning'))
+                toastr.warning("{{ session('warning') }}");
+            @endif
 
-    });
-</script>
-{{-- ================================ --}}
+        });
+    </script>
+    {{-- ================================ --}}
     <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
     <script>
         $(function() {
-    $("#example1").DataTable({
-        "paging": true,
-        "lengthChange": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-        "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.13.5/i18n/ar.json" // تعريب الجدول
-        }
-    });
-});
-
+            $("#example1").DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.13.5/i18n/ar.json" // تعريب الجدول
+                }
+            });
+        });
     </script>
 
 

@@ -16,7 +16,7 @@
 
 
 {{-- ////////////////////// --}}
-<div class="row py-2" style="padding: 0;margin-top: 76px;background-color: rgba(13, 12, 44, 0.384);margin-right: 0px;margin-left: 0px;">
+<div class="row py-2 mb-2" style="padding: 0;margin-top: 76px;background-color: rgba(13, 12, 44, 0.384);margin-right: 0px;margin-left: 0px;">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb px-5">
                 <li class="breadcrumb-item"><a
@@ -31,8 +31,10 @@
     <div class="p-5">
         <div class="card mb-3 px-5">
             <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="{{Storage::url($product->image)}}" class="img-fluid rounded-start" alt="...">
+                <div class="col-md-4" style="align-content: center">
+                    {{-- <img src="{{Storage::url($product->image)}}" class="img-fluid rounded-start" alt="..."> --}}
+                    <img src="{{ asset('/' . $product->image) }}" class="img-fluid rounded-start" alt="...">
+
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
@@ -48,9 +50,9 @@
 
                         </div>
                         <div class="py-4">
-                            <s>{{trans('website_trans.price')}} : {{$product->price}}$</s>
+                            <s>{{trans('website_trans.price')}} : ${{$product->price}}</s>
                             <span
-                                class="float-end">{{trans('website_trans.selling_price')}} : {{$product->selling_price}}$</span>
+                                class="float-end">{{trans('website_trans.selling_price')}} : ${{$product->selling_price}}</span>
                         </div>
                         <div class="py-4">
                             <p class="card-text">{{$product->description}}</p>
@@ -117,7 +119,7 @@
 
 
     <div class="px-5">
-        <div class="row">
+        <div class="row mb-2" >
             <div class="card col-6">
                 <div class="card-header">
                     <h4 class="py-4">{{trans('website_trans.Specifications')}}</h4>
